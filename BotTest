@@ -1,0 +1,18 @@
+import pytest
+from bot import Bot
+
+@pytest.fixture
+def bot():
+    return Bot()
+
+def test_question(bot):
+    bot.set_question("What is 2 + 2?", "4")
+    assert bot.get_question() == "What is 2 + 2?"
+
+def test_answer_correct(bot):
+    bot.set_question("What is 2 + 2?", "4")
+    assert bot.check_answer("4") is True
+
+def test_answer_incorrect(bot):
+    bot.set_question("What is 2 + 2?", "4")
+    assert bot.check_answer("5") is False
